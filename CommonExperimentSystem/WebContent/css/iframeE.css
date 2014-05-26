@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+
+.container {
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+	font-family: "微软雅黑 Light";
+}
+.title {
+}
+
+form h1 {
+	font-size: 14px;
+	font-family: "微软雅黑 Light";
+}
+form p {
+	margin-left: 20px;
+	font-size: 14px;
+}
+.title {
+	display: block;
+	width: 80px;
+	float: left;
+	text-align: right;
+	margin-right: 20px;
+}
+.button_group {
+	margin-left: 40px;
+}
+
+#form ul {
+	list-style-type: none;
+}
+.course_info {
+	margin-left: 40px;
+	font-weight: bolder;
+	width: 650px;
+	height: 35px;
+}
+.course_info span {
+	display: block;
+	width: 200px;
+	float: left;
+}
+#form {
+
+}
+
+
+
+#form ul li {
+	display: block;
+	margin-top: 3px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #999999;
+	width: 650px;
+}
+#form ul li span {
+	display: block;
+	width: 200px;
+	float: left;
+}
+.exp_title {
+	display: block;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bolder;
+	padding-bottom: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E3E3E3;
+}
+.container .courseInfo ul li {
+	display: block;
+	padding-bottom: 3px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #E5E5E5;
+}
