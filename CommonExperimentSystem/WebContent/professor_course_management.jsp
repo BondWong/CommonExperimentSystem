@@ -27,7 +27,16 @@
       	</c:when>
       	<c:otherwise>
       		<c:forEach var="course" items="${sessionScope.createdCourses }" >
-      			<li><span>${ course.name}</span><button type="button" id="course${course.id }">编辑信息</button><a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}"><button type="button" class="student_management">管理实验</button></a><a href="DeleteCourseServlet?id=${sessionScope.id.id }&courseId=${course.id }"><button type="button">删除</button></a></li>
+      			<li><span>${ course.name}</span>
+      			<button type="button" id="course${course.id }">编辑信息</button>
+      			<c:if test="${!course.open}">
+      				<a href="CourseOpenCloseServlet?courseId=${course.id }&open=true"><button type="button">开放课程</button></a>
+      			</c:if>
+      			<c:if test="${course.open}">
+      				<a href="CourseOpenCloseServlet?courseId=${course.id }&open=false"><button type="button">关闭课程</button></a>
+      			</c:if>
+      			<a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}"><button type="button" class="student_management">管理实验</button></a>
+      			<a href="DeleteCourseServlet?id=${sessionScope.id.id }&courseId=${course.id }"><button type="button">删除</button></a></li>
       		</c:forEach>
       	</c:otherwise>
       </c:choose>
@@ -43,19 +52,42 @@
 
 </div>
   <script>
-  	 $('.addCourse').on('click',function(){
-         $.layer({
-    	type: 2,
+  var status;
+	 $('.addCourse').on('click',function(){
+      $.layer({
+ 		type: 2,
 		btns:2,
 		btn: ['确定', '取消'],
-    	title: '添加课程',
-    	area: ['600px', '250px'],
+ 		title: '添加课程',
+		yes: function(index){
+			var name = layer.getChildFrame("#courseName", index).val();
+			var classTime = layer.getChildFrame("#classTime", index).val();
+			var major = layer.getChildFrame("#courseMajor", index).val();
+			var duration = layer.getChildFrame("#courseDuration", index).val();
+			var description = layer.getChildFrame("#courseDescription", index).val();
+			var data = {"id":"${sessionScope.id.id}","name":name,"classTime":classTime,"major":major,"duration":duration,"description":description};
+			$.ajax({ 
+		          type : "post", 
+		          url : "CreateCourseServlet", 
+		          data : data, 
+		          async : false,
+		          success:function(data){
+					location.reload();
+		          }
+		          });
+			layer.close(index);
+			},
+ 		area: ['600px', '400px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
-    	shade: [0],
-        iframe: {src:"addCourse.html"},
+ 		shade: [0],
+		end: function(){
+			if(status == 1){alert("OK");}
+			if(status == 0){alert("fail");}
+			},
+     iframe: {src:"addCourse.html"},
 		success: function(){
-        layer.shift('top'); 
-    }
+     layer.shift('top'); 
+ }
 });
      });
   	<c:forEach var="course" items="${sessionScope.createdCourses }" >
@@ -65,12 +97,28 @@
 		btns:2,
 		btn: ['确定', '取消'],
     	title: '编辑课程',
+    	yes: function(index){
+			var name = layer.getChildFrame("#course_name", index).val();
+			var classTime = layer.getChildFrame("#course_classTime", index).val();
+			var duration = layer.getChildFrame("#course_duration", index).val();
+			var data = {"courseId":"${course.id}","name":name,"classTime":classTime,"duration":duration};
+			$.ajax({ 
+		          type : "post", 
+		          url : "UpdateCourseServlet", 
+		          data : data, 
+		          async : false,
+		          success:function(data){
+					location.reload();
+		          }
+		          });
+			layer.close(index);
+			},
     	area: ['600px', '250px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
     	shade: [0],
         iframe: {src:"editCourse.jsp?courseId=${course.id}"},
 		success: function(){
-        layer.shift('top'); 
+        	layer.shift('top'); 
     }
 });
      });

@@ -15,10 +15,8 @@
     <h1>查看实验页面</h1>
   </div>
   <div id="right_content">
-    选择实验课程:
-    <select disabled="disabled">
-  	<option>C++实验课</option>
-	</select>
+    所在课程:
+  	<button type="button">${sessionScope.courseName}</button>
   </div>
   <div id="right_add">
     <h3>课程实验列表</h3>
@@ -34,7 +32,9 @@
       
       	<c:forEach var="experiment" items="${ sessionScope.experiments }" varStatus="status">
       		<c:if test="${experiment.courseId eq sessionScope.experimentCourseId }">
-      			<li><span>实验${status.count}：<c:out value = "${experiment.name }"/></span><button type="button" id="experiment${experiment.id }">查看</button><button type="button" class="upExp">上传实验报告</button></li>
+      			<li><span>实验${status.count}：<c:out value = "${experiment.name }"/></span>
+      			<button type="button" id="experiment${experiment.id }">查看</button>
+      			<button type="button" class="upExp">上传实验报告</button></li>
       		</c:if>
       	</c:forEach>
     	</c:otherwise>
@@ -52,9 +52,11 @@
 			$('#experiment${experiment.id}').on('click',function(){
          		$.layer({
     			type: 2,
+    			btns:1,
+    			btn: ['返回'],
     			title: '查看实验',
-    			area: ['800px', '450px'],
-				offset: [($(window).height() - 450)/2 + 'px', ''],
+    			area: ['650px', '600px'],
+				offset: [($(window).height() - 600)/2 + 'px', ''],
     			shade: [0],
         		iframe: {src:"showExp.jsp?experimentId=${experiment.id}"},
 				success: function(){

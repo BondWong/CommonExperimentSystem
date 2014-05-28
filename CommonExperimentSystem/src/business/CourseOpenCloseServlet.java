@@ -9,20 +9,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.User;
 import persistence.transaction.Transaction;
-import persistence.transaction.daoTransaction.ApplyCourseTransaction;
+import persistence.transaction.daoTransaction.CourseOpenCloseTransaction;
 
 /**
- * Servlet implementation class ApplyCourseServlet
+ * Servlet implementation class CourseOpenCloseServlet
  */
-@WebServlet("/ApplyCourseServlet")
-public class ApplyCourseServlet extends HttpServlet {
+@WebServlet("/CourseOpenCloseServlet")
+public class CourseOpenCloseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ApplyCourseServlet() {
+    public CourseOpenCloseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +33,26 @@ public class ApplyCourseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id = request.getParameter("id");
-		Long courseID = Long.parseLong(request.getParameter("courseId"));
+		Long courseId = Long.parseLong(request.getParameter("courseId"));
+		boolean open = Boolean.parseBoolean(request.getParameter("open"));
 		
-		Transaction transaction = new ApplyCourseTransaction();
+		System.out.println(open);
+		Transaction transaction = new CourseOpenCloseTransaction();
 		try {
-			transaction.execute(id, courseID);
+			transaction.execute(courseId, open);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		String id = "";
 		HttpSession session = request.getSession();
 		synchronized(session){
-			session.removeAttribute("openedCourses");
+			session.removeAttribute("createdCourses");
+			id = ((User)session.getAttribute("id")).getId();
 		}
 		
-		response.sendRedirect("GetOpenedCourse");
-		
+		response.sendRedirect("GetCreatedCoursesServlet?id="+id);
 	}
 
 	/**

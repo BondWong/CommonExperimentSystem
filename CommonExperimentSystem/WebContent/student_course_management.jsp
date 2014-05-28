@@ -28,7 +28,7 @@
       	</c:when>
       	<c:otherwise>
       		<c:forEach var="course" items="${sessionScope.selectedCourses }" >
-      			<li><span>${ course.name}</span><a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}"><button type="button" class="student_management">查看实验</button></a></li>
+      			<li><span>${ course.name}</span><a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}&courseName=${course.name}"><button type="button" class="student_management">查看实验</button></a></li>
       		</c:forEach>
       	</c:otherwise>
       </c:choose>
@@ -49,25 +49,12 @@
     	area: ['800px', '450px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
     	shade: [0],
-        iframe: {src:"GetCourses"},
+        iframe: {src:"GetOpenedCourses"},
 		success: function(){
         layer.shift('top'); 
     }
 	});
-})
-	$('.showCourse').on('click',function(){
-         $.layer({
-    	type: 2,
-    	title: '查看课程',
-    	area: ['450px', '250px'],
-		offset: [($(window).height() - 250)/2 + 'px', ''],
-    	shade: [0],
-        iframe: {src:"showCourse.html"},
-		success: function(){
-        layer.shift('top'); 
-    }
-	});
-})
+});
 </script>
 </body>
 </html>

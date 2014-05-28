@@ -11,38 +11,30 @@
 		<form action="#" method="post">
 		<h1>实验信息</h1>
         <p>
-            <span class="title"><label for="ExpTitle">实验标题</label></span>
-            <input type="text" name="ExpTitle" size="51" />
+            <span class="title"><label for="name">实验标题</label></span>
+            <input type="text" name="name" size="51" id="experiment_name"/>
         </p>
         <p>
-            <span class="title"><label for="ExpType">类型:</label></span>
-            <input type="text" name="ExpType" size="51" />
+            <span class="title"><label for="type">类型:</label></span>
+            <input type="text" name="type" size="51" id="experiment_type"/>
         </p>
         <p>
-            <span class="title"><label for="ExpDeadline">截至时间:</label></span>
-            <input type="text" name="ExpDeadline" size="51" />
+            <span class="title"><label for="duration">截至时间:</label></span>
+            <input type="text" name="duration" size="51" id="experiment_duration"/>
         </p>
         <h1>实验详细内容</h1>
         <p>
-            <span class="title"><label for="ExpAim">实验目的:</label></span>
-            <textarea name="ExpAim" cols="45" rows="6"></textarea>
+            <span class="title"><label for="purpose">实验目的:</label></span>
+            <textarea name="purpose" cols="45" rows="6" id="experiment_purpose"></textarea>
         </p>
         <p>
-            <span class="title"><label for="ExpRer">实验原理:</label></span>
-            <textarea name="ExpRer" cols="45" rows="6"></textarea>
+            <span class="title"><label for="demand">实验要求:</label></span>
+            <textarea name="ExpRer" cols="45" rows="6" id="experiment_demand"></textarea>
         </p>
         <p>
-            <span class="title"><label for="ExpCon">实验内容:</label></span>
-            <textarea name="ExpCon" cols="45" rows="6"></textarea>
+            <span class="title"><label for="description">实验描述:</label></span>
+            <textarea name="description" cols="45" rows="6" id="experiment_description"></textarea>
         </p>
-        <p>
-            <span class="title"><label for="ExpStep">实验步骤:</label></span>
-            <textarea name="ExpStep" cols="45" rows="6"></textarea>
-        </p>
-        <div class="button_group">
-            <input name="" type="submit" value="确定"  />
-            <input name="" type="reset" value="取消" />
-        </div>     
         </form>
 </div>
 </body>

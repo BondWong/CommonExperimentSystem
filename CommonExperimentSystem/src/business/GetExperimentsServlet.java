@@ -36,22 +36,22 @@ public class GetExperimentsServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("GetExperimentsServlet");
 		Long courseId = Long.parseLong(request.getParameter("courseId"));
+		String courseName = request.getParameter("courseName");
+		courseName = new String(courseName.getBytes("ISO-8859-1") ,"utf8");
 		HttpSession session = request.getSession();
 		boolean hasExperiment = false;
 		
 		synchronized(session){
 			hasExperiment = session.getAttribute("experimentCourseId")!=courseId?false:true;
-			
 		}
 		
 		if(!hasExperiment){
 			List<Experiment> experiments = null;
 			Transaction transaction = new GetExperimentsTransaction();
 			try {
-				System.out.println(courseId);
 				experiments = (List<Experiment>) transaction.execute(courseId);
-				System.out.println(experiments.size());
 				} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -60,6 +60,7 @@ public class GetExperimentsServlet extends HttpServlet {
 			synchronized(session){
 				session.setAttribute("experiments", experiments);
 				session.setAttribute("experimentCourseId", courseId);
+				session.setAttribute("courseName", courseName);
 			}
 		}
 			

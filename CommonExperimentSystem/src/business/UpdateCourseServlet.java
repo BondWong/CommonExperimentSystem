@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.User;
 import persistence.transaction.Transaction;
 import persistence.transaction.daoTransaction.UpdateCourseTransaction;
 
@@ -42,15 +44,23 @@ public class UpdateCourseServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String duration = request.getParameter("duration");
 		String classTime = request.getParameter("classTime");
-		boolean isOpen = Boolean.parseBoolean(request.getParameter("isOpen"));
 		
 		Transaction transaction = new UpdateCourseTransaction();
 		try {
-			transaction.execute(courseId, name, duration, classTime, isOpen);
+			transaction.execute(courseId, name, duration, classTime);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String id = "";
+		HttpSession session = request.getSession();
+		synchronized(session){
+			session.removeAttribute("createdCourses");
+			id = ((User)session.getAttribute("id")).getId();
+			System.out.println(id);
+		}
+		
+		response.sendRedirect("GetCreatedCoursesServlet?id="+id);
 		
 	}
 

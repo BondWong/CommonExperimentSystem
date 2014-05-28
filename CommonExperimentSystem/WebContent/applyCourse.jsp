@@ -23,7 +23,7 @@
             <c:otherwise>
       		   <ul>
       		   <c:forEach var="course" items="${sessionScope.openedCourses }">
-    			<li><span>${course.name }</span><span>${course.owner.name }</span><span>${course.duration }</span><button type="button">申请</button></li>
+    				<li><span>${course.name }</span><span>${course.owner.name }</span><span>${course.duration }</span><button type="button" id="course${course.id }">申请</button></li>
     		   	</c:forEach>
     		   </ul>
             </c:otherwise>

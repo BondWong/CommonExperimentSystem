@@ -17,7 +17,7 @@ import persistence.transaction.daoTransaction.GetOpenedCoursesTransaction;
 /**
  * Servlet implementation class GetCourses
  */
-@WebServlet("/GetCourses")
+@WebServlet("/GetOpenedCourses")
 public class GetOpenedCoursesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

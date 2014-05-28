@@ -16,20 +16,16 @@
 		<input type="hidden" name="courseId" value="course.id"/>
         <p>
             <span class="title"><label for="name">名称</label></span>
-            <input type="text" name="name" value="${ course.name}" size="51" />
+            <input type="text" name="name" value="${ course.name}" size="51" id="course_name"/>
         </p>
         <p>
             <span class="title"><label for="duration">开课时间:</label></span>
-            <input type="text" name="duration"  value="${course.duration }" size="51" />
+            <input type="text" name="duration"  value="${course.duration }" size="51" id="course_duration"/>
         </p>
         <p>
             <span class="title"><label for="classTime">上课时间:</label></span>
-            <input type="text" name="classTime"  value="${course.classTime }" size="51" />
+            <input type="text" name="classTime"  value="${course.classTime }" size="51" id="course_classTime"/>
         </p>
-        <div class="button_group">
-            <input name="" type="submit" value="确定"  />
-            <input name="" type="reset" value="取消" />
-        </div>     
         </form>
         </c:if>
 	</c:forEach>

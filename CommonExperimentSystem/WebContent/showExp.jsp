@@ -38,9 +38,6 @@
             <span class="title"><label for="description">实验描述:</label></span>
             <textarea name="description" cols="45" rows="6" readOnly>${ experiment.description}</textarea>
         </p>
-        <div class="button_group">
-            <input name="" type="submit" value="确定"  />
-        </div>     
         </form>
         </c:if>
 	</c:forEach>

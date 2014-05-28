@@ -33,7 +33,10 @@
       
       	<c:forEach var="experiment" items="${ sessionScope.experiments }">
       		<c:if test="${experiment.courseId eq sessionScope.experimentCourseId }">
-      			<li><span>实验一：<c:out value = "${experiment.name }"/></span><button type="button">开放实验</button><button type="button" id="experiment${experiment.id }">编辑</button><a href="DeleteExperimentServlet?experimentId=${experiment.id}&courseId=${experiment.courseId}"><button type="button">删除</button></a></li>
+      			<li><span>实验一：<c:out value = "${experiment.name }"/></span>
+      			<button type="button" id="experiment${experiment.id }report">查看实验报告</button>
+      			<button type="button" id="experiment${experiment.id }">编辑</button>
+      			<a href="DeleteExperimentServlet?experimentId=${experiment.id}&courseId=${experiment.courseId}"><button type="button">删除</button></a></li>
       		</c:if>
       	</c:forEach>
     	</c:otherwise>
@@ -46,10 +49,31 @@
 <%@ include file="parts/footer.jsp" %>
 <script>
   	 $('.addExp').on('click',function(){
-         $.layer({
+        $.layer({
     	type: 2,
     	title: '添加实验',
-    	area: ['600px', '450px'],
+    	btns:2,
+    	btn: ['确定', '取消'],
+    	yes: function(index){
+			var name = layer.getChildFrame("#experiment_name", index).val();
+			var type = layer.getChildFrame("#experiment_type", index).val();
+			var duration = layer.getChildFrame("#experiment_duration", index).val();
+			var purpose = layer.getChildFrame("#experiment_purpose", index).val();
+			var demand = layer.getChildFrame("#experiment_demand", index).val();
+			var description = layer.getChildFrame("#experiment_description", index).val();
+			var data = {"id":"${sessionScope.id.id}","courseId":"${sessionScope.experimentCourseId}","name":name,"type":type,"duration":duration,"purpose":purpose,"demand":demand,"description":description};
+			$.ajax({ 
+		          type : "post", 
+		          url : "CreateExperimentServlet", 
+		          data : data, 
+		          async : false,
+		          success:function(data){
+					location.reload();
+		          }
+		          });
+			layer.close(index);
+			},
+    	area: ['600px', '550px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
     	shade: [0],
         iframe: {src:"addExp.html"},
@@ -63,16 +87,52 @@
 	 $('#experiment${experiment.id }').on('click',function(){
          $.layer({
     	type: 2,
+    	btns:2,
+    	btn: ['确定', '取消'],
     	title: '编辑实验',
-    	area: ['600px', '450px'],
+    	yes: function(index){
+			var name = layer.getChildFrame("#experiment_name", index).val();
+			var type = layer.getChildFrame("#experiment_type", index).val();
+			var duration = layer.getChildFrame("#experiment_duration", index).val();
+			var purpose = layer.getChildFrame("#experiment_purpose", index).val();
+			var demand = layer.getChildFrame("#experiment_demand", index).val();
+			var description = layer.getChildFrame("#experiment_description", index).val();
+			var data = {"courseId":"${sessionScope.experimentCourseId}","experimentId":"${experiment.id}","name":name,"type":type,"duration":duration,"purpose":purpose,"demand":demand,"description":description};
+			$.ajax({ 
+		          type : "post", 
+		          url : "UpdateExperimentServlet", 
+		          data : data, 
+		          async : false,
+		          success:function(data){
+					location.reload();
+		          }
+		          });
+			layer.close(index);
+			},
+    	area: ['600px', '550px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
     	shade: [0],
         iframe: {src:"editExp.jsp?experimentId=${experiment.id}"},
 		success: function(){
-        layer.shift('top'); 
+        	layer.shift('top'); 
     }
 });
      });
+	 $('#experiment${experiment.id}report').on('click',function(){
+		 $.layer({
+		    	type: 2,
+		    	title: '查看实验报告',
+		    	btns:2,
+		    	btn: ['确定', '取消'],
+		       	area: ['600px', '550px'],
+				offset: [($(window).height() - 450)/2 + 'px', ''],
+		    	shade: [0],
+		        iframe: {src:"showReport.jsp"},
+				success: function(){
+		        layer.shift('top'); 
+		    }
+		});
+	 });
 	 </c:if>
 	 </c:forEach>
   </script>

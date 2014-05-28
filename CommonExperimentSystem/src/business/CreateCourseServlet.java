@@ -7,10 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import persistence.transaction.Transaction;
 import persistence.transaction.daoTransaction.CreateCourseTransaction;
-import model.Course;
 
 /**
  * Servlet implementation class CreateCourseServlet
@@ -40,16 +40,26 @@ public class CreateCourseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
-		Course c = (Course) request.getAttribute("course");
+		String classTime = request.getParameter("classTime");
+		String major = request.getParameter("major");
+		String duration = request.getParameter("duration");
+		String description = request.getParameter("description");
+		String name = request.getParameter("name");
 		
 		Transaction transaction = new CreateCourseTransaction();
 		try {
-			transaction.execute(id, c);
+			transaction.execute(id, classTime, major, duration, description, name);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			response.setStatus(500);
 		}
+		
+		HttpSession session = request.getSession();
+		synchronized(session){
+			session.removeAttribute("createdCourses");
+		}
+		
+		response.sendRedirect("GetCreatedCoursesServlet?id="+id);
 		
 	}
 

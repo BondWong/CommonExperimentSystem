@@ -36,9 +36,9 @@ public class GetCreatedCoursesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
 		System.out.println(id);
 		Transaction transaction = new GetCreatedCoursesTransaction();
-		HttpSession session = request.getSession();
 		boolean hasCourses = false;
 		synchronized(session){
 			hasCourses = session.getAttribute("createdCourses")==null?false:true;
@@ -47,7 +47,6 @@ public class GetCreatedCoursesServlet extends HttpServlet {
 			Set<Course> courses = null;
 			try {
 				courses = (Set<Course>) transaction.execute(id);
-				System.out.println(courses.size());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
