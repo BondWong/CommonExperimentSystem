@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -37,7 +38,10 @@ public class FileServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
+    public void init() {
+    	setUp();
+    }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -50,12 +54,14 @@ public class FileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println("FileServlet");
 		String id = request.getParameter("id");
 		Long experimentId = Long.parseLong(request.getParameter("experimentId"));
-		setUp();
+		System.out.println(id + " " + experimentId);
 		String link = null;
 		try {
-			link = process(request);
+			link = process(request, id, experimentId);
+			System.out.println(link);
 		} catch (FileSizeLimitExceededException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,22 +80,31 @@ public class FileServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String url = "GetExperimentsServlet";
+		HttpSession session = request.getSession();
+		synchronized(session){
+			url+=("?id="+id+"&courseId"+session.getAttribute("experimentCourseId")+"courseName"+session.getAttribute("courseName"));
+			System.out.println(url);
+		}
+		response.sendRedirect(url);
 	}
 	
 	private void setUp(){
+		System.out.println("setUp");
 		factory = new DiskFileItemFactory();
     	File repository = (File) this.getServletContext()
 				.getAttribute("javax.servlet.context.tempdir");
 		factory.setRepository(repository);
 		upload = new ServletFileUpload(factory);
 		upload.setSizeMax(1024*1024*10);
+		root = getServletConfig().getServletContext()
+        		.getRealPath("/");
 	}
 	
-	private String process(HttpServletRequest request) throws FileUploadException,
+	private String process(HttpServletRequest request, String id, Long experimentId) throws FileUploadException,
 		FileUploadBase.FileSizeLimitExceededException, 
 		Exception{
-		String id = request.getParameter("id");
-		
 		List<FileItem> items = upload.parseRequest(request);
 		Iterator<FileItem> iter = items.iterator();
 		
@@ -101,14 +116,14 @@ public class FileServlet extends HttpServlet {
 				continue;
 			}
 			
-			File dir = new File(root + "experimentReports");
+			File dir = new File(root + "/experimentReports");
 			if(!dir.exists()){
 				dir.mkdir();
 			}
 			
 			String contentType = item.getContentType();
-			File uploaddedFile = new File(root + "experimentReports/" + 
-					id + "." + contentType.substring(contentType.indexOf("/")+1, contentType.length()));
+			File uploaddedFile = new File(root + "/experimentReports/" + 
+					id + "-" + experimentId + "." + contentType.substring(contentType.indexOf("/")+1, contentType.length()));
 			
 			item.write(uploaddedFile);
 			

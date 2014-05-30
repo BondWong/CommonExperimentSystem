@@ -14,9 +14,7 @@
   </div>
   <div id="right_content">
     添加实验点击:
-    <select disabled="disabled">
-  	<option>C++实验课</option>
-	</select>
+    <button type="button"><c:out value="${sessionScope.courseName }"/></button>
     <button type="button" class="addExp">添加实验</button>
   </div>
   <div id="right_add">
@@ -61,7 +59,8 @@
 			var purpose = layer.getChildFrame("#experiment_purpose", index).val();
 			var demand = layer.getChildFrame("#experiment_demand", index).val();
 			var description = layer.getChildFrame("#experiment_description", index).val();
-			var data = {"id":"${sessionScope.id.id}","courseId":"${sessionScope.experimentCourseId}","name":name,"type":type,"duration":duration,"purpose":purpose,"demand":demand,"description":description};
+			var courseName = "${sessionScope.courseName}";
+			var data = {"id":"${sessionScope.id.id}","courseId":"${sessionScope.experimentCourseId}","name":name,"type":type,"duration":duration,"purpose":purpose,"demand":demand,"description":description,"courseName":courseName};
 			$.ajax({ 
 		          type : "post", 
 		          url : "CreateExperimentServlet", 

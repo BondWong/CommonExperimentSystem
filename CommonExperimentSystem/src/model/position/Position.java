@@ -10,6 +10,7 @@ import model.UserType;
 public abstract class Position {
 	protected Set<Course> appliedCourses;
 	protected Set<Course> createdCourses;
+	protected Set<Long> reportExperimentIDs;
 	
 	public abstract UserType getUserType();
 	
@@ -17,7 +18,7 @@ public abstract class Position {
 	public abstract void removeAppliedCourse(Course course);
 	public abstract Set<Course> getAppliedCourses();
 	public abstract void setAppliedCourses(Set<Course> appliedCourses);
-	public abstract void submitReport(Experiment Experiment, String reportLink);
+	public abstract void submitReport(Experiment Experiment, String reportLink, String id);
 	
 	public abstract void createCourse(User user, Course course);
 	public abstract void removeCreatedCourse(Course course);

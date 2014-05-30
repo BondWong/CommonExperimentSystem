@@ -39,8 +39,14 @@ public class GetExperimentsServlet extends HttpServlet {
 		System.out.println("GetExperimentsServlet");
 		Long courseId = Long.parseLong(request.getParameter("courseId"));
 		String courseName = request.getParameter("courseName");
-		courseName = new String(courseName.getBytes("ISO-8859-1") ,"utf8");
+		
 		HttpSession session = request.getSession();
+		if(courseName!=null){
+			courseName = new String(courseName.getBytes("ISO-8859-1") ,"utf8");
+			synchronized(session){
+				session.setAttribute("courseName", courseName);
+			}
+		}
 		boolean hasExperiment = false;
 		
 		synchronized(session){
@@ -60,7 +66,6 @@ public class GetExperimentsServlet extends HttpServlet {
 			synchronized(session){
 				session.setAttribute("experiments", experiments);
 				session.setAttribute("experimentCourseId", courseId);
-				session.setAttribute("courseName", courseName);
 			}
 		}
 			

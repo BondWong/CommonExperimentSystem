@@ -35,6 +35,7 @@ public class GetOpenedCoursesServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String id = request.getParameter("id");
 		HttpSession session = request.getSession();
 		boolean hasCourse = false;
 		synchronized(session){
@@ -45,7 +46,8 @@ public class GetOpenedCoursesServlet extends HttpServlet {
 			Transaction transaction = new GetOpenedCoursesTransaction();
 			List<Course> courses = null;
 			try {
-				courses = (List<Course>) transaction.execute();
+				courses = (List<Course>) transaction.execute(id);
+				System.out.println(courses);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -33,11 +33,11 @@ public class ApplyCourseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("id");
-		Long courseID = Long.parseLong(request.getParameter("courseId"));
+		Long courseId = Long.parseLong(request.getParameter("courseId"));
 		
 		Transaction transaction = new ApplyCourseTransaction();
 		try {
-			transaction.execute(id, courseID);
+			transaction.execute(id, courseId);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,9 +46,10 @@ public class ApplyCourseServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		synchronized(session){
 			session.removeAttribute("openedCourses");
+			session.removeAttribute("selectedCourses");
 		}
 		
-		response.sendRedirect("GetOpenedCourse");
+		response.sendRedirect("GetSelectedCourseServlet?id="+id);
 		
 	}
 

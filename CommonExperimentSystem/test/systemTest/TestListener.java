@@ -80,8 +80,22 @@ public class TestListener implements ServletContextListener {
 			c2.setClassTime("周四7、8、9节");
 			c2.setDescription("100％易挂科");
 			c2.setDuration("16周");
-			c2.setOpen(false);
+			c2.setOpen(true);
 			p.createCourse(c2);
+			Course c3 = new Course();
+			c3.setName("升起学");
+			c3.setClassTime("周四7、8、9节");
+			c3.setDescription("100％易挂科");
+			c3.setDuration("16周");
+			c3.setOpen(true);
+			p.createCourse(c3);
+			Course c4 = new Course();
+			c4.setName("降旗学");
+			c4.setClassTime("周四7、8、9节");
+			c4.setDescription("100％易挂科");
+			c4.setDuration("16周");
+			c4.setOpen(true);
+			p.createCourse(c4);
 			udao.update(p);
 			em.getTransaction().commit();
 			

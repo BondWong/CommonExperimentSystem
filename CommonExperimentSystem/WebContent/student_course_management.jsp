@@ -45,11 +45,24 @@
   	 $('.stuApply').on('click',function(){
          $.layer({
     	type: 2,
+    	btns:1,
+		btn: ['确定并刷新'],
     	title: '申请课程',
+    	yes: function(index){
+			$.ajax({ 
+		          type : "get", 
+		          url : "GetSelectedCourseServlet?id=${sessionScope.id.id }", 
+		          async : false,
+		          success:function(data){
+					location.reload();
+		          }
+		          });
+			layer.close(index);
+			},
     	area: ['800px', '450px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
     	shade: [0],
-        iframe: {src:"GetOpenedCourses"},
+        iframe: {src:"GetOpenedCourses?id=${sessionScope.id.id}"},
 		success: function(){
         layer.shift('top'); 
     }

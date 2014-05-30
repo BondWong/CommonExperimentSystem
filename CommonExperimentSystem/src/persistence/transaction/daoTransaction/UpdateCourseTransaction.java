@@ -16,7 +16,6 @@ public class UpdateCourseTransaction extends DAOTransaction{
 		c.setClassTime((String)params[3]);
 		c.setDuration((String)params[2]);
 		c.setName((String)params[1]);
-		c.setOpen((boolean)params[4]);
 		cdao.update(c);
 		return null;
 	}

@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="css/iframeE.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
 </head>
 
 <body>
@@ -24,6 +25,20 @@
       		   <ul>
       		   <c:forEach var="course" items="${sessionScope.openedCourses }">
     				<li><span>${course.name }</span><span>${course.owner.name }</span><span>${course.duration }</span><button type="button" id="course${course.id }">申请</button></li>
+    				<script type="text/javascript">
+						$('#course${course.id }').on('click',function(){
+							var id = '${sessionScope.id.id}';
+							var courseId = '${course.id}';
+							$.ajax({
+								url:'ApplyCourseServlet?id='+id+'&courseId='+courseId,
+								type:'get',
+								asyn:false,
+								success:function(data){
+									window.location.href="GetOpenedCourses?id=${sessionScope.id.id}";
+								}
+							});
+						});
+					</script>
     		   	</c:forEach>
     		   </ul>
             </c:otherwise>

@@ -55,9 +55,10 @@ public class Student extends Position implements Serializable{
 	}
 
 	@Override
-	public void submitReport(Experiment experiment, String reportLink) {
+	public void submitReport(Experiment experiment, String reportLink, String id) {
 		// TODO Auto-generated method stub
 		experiment.addReportLink(reportLink);
+		experiment.addReportor(id);
 	}
 
 	@Override

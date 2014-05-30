@@ -47,7 +47,9 @@ public class CreateExperimentServlet extends HttpServlet {
 		String purpose = request.getParameter("purpose");
 		String demand = request.getParameter("demand");
 		String description = request.getParameter("description");
-				
+		
+		String courseName = request.getParameter("courseName");
+		System.out.println(courseName);
 		Transaction transaction = new CreateExperimentTransaction();
 		try {
 			transaction.execute(id, courseId, name, type, duration, purpose, demand, description);
@@ -60,6 +62,7 @@ public class CreateExperimentServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		synchronized(session){
 			session.removeAttribute("experimentCourseId");
+			session.setAttribute("courseName", courseName);
 		}
 		
 		response.sendRedirect("GetExperimentsServlet?courseId="+courseId);

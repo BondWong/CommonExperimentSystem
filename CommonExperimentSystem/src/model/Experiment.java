@@ -43,7 +43,9 @@ public class Experiment implements Serializable{
 	private String description;
 	@ElementCollection
 	private Set<String> reportLinks;
-
+	@ElementCollection
+	private Set<String> reportors;
+	
 	public Long getId() {
 		return id;
 	}
@@ -124,6 +126,31 @@ public class Experiment implements Serializable{
 
 	public void setReportLinks(Set<String> reportLinks) {
 		this.reportLinks = reportLinks;
+	}
+	
+	public Set<String> getReportors() {
+		if(this.reportors == null){
+			this.reportors = new LinkedHashSet<String>();
+		}
+		return this.reportors;
+	}
+	
+	public void setReportors(Set<String> reportors) {
+		this.reportors = reportors;
+	}
+	
+	public void addReportor(String id) {
+		if(this.reportors == null){
+			this.reportors = new LinkedHashSet<String>();
+		}
+		this.reportors.add(id);
+	}
+	
+	public void removeReportor(String id) {
+		if(this.reportors == null){
+			this.reportors = new LinkedHashSet<String>();
+		}
+		this.reportors.remove(id);
 	}
 	
 	public boolean equals(Object object){

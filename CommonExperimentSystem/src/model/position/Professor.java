@@ -46,7 +46,7 @@ public class Professor extends Position implements Serializable{
 	}
 
 	@Override
-	public void submitReport(Experiment Experiment, String reportLink) {
+	public void submitReport(Experiment Experiment, String reportLink, String id) {
 		// TODO Auto-generated method stub
 		
 	}

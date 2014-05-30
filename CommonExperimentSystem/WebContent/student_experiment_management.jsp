@@ -34,7 +34,61 @@
       		<c:if test="${experiment.courseId eq sessionScope.experimentCourseId }">
       			<li><span>实验${status.count}：<c:out value = "${experiment.name }"/></span>
       			<button type="button" id="experiment${experiment.id }">查看</button>
+      			<script>
+      			$('#experiment${experiment.id}').on('click',function(){
+         			$.layer({
+    					type: 2,
+    					btns:1,
+    					btn: ['返回'],
+    					title: '查看实验',
+    					area: ['650px', '600px'],
+						offset: [($(window).height() - 600)/2 + 'px', ''],
+    					shade: [0],
+        				iframe: {src:"showExp.jsp?experimentId=${experiment.id}"},
+						success: function(){
+        					layer.shift('top'); 
+    					}
+					});
+				});
+      			</script>
       			<button type="button" class="upExp">上传实验报告</button></li>
+      			<script>
+				$('.upExp').on('click',function(){
+        		$.layer({
+    			type: 2,
+				btns:2,
+				btn: ['确定', '取消'],
+    			title: '上传实验报告',
+    			yes: function(index){
+    				var file = new FormData($(layer.getChildFrame("#reportUpload", index))[0]);
+					//var file = layer.getChildFrame("#reportUpload", index).val();
+					alert(file);
+					var data = {"id":"${sessionScope.id.id}","experimentId":"${experiment.id}","file":file};
+					alert(data);
+					$.ajax({ 
+		          		type : "post",
+		          		url : "FileServlet", 
+		          		data : data, 
+		          		async : false,
+		          		cache: false,
+		    	        contentType: false,
+		    	        processData: false,
+		          		success:function(data){
+							location.reload();
+		          		}
+		          	});
+					layer.close(index);
+				},
+    			area: ['300px', '150px'],
+				offset: [($(window).height() - 150)/2 + 'px', ''],
+    			shade: [0],
+        		iframe: {src:"upExp.html"},
+				success: function(){
+        			layer.shift('top'); 
+    			}
+				});
+			});
+			</script>
       		</c:if>
       	</c:forEach>
     	</c:otherwise>
@@ -46,42 +100,6 @@
 
 <%@ include file="parts/footer.jsp" %>
 </div>
-<script>
-	<c:forEach var="experiment" items="${ sessionScope.experiments }" varStatus="status">
-		<c:if test="${experiment.courseId eq sessionScope.experimentCourseId }">  	
-			$('#experiment${experiment.id}').on('click',function(){
-         		$.layer({
-    			type: 2,
-    			btns:1,
-    			btn: ['返回'],
-    			title: '查看实验',
-    			area: ['650px', '600px'],
-				offset: [($(window).height() - 600)/2 + 'px', ''],
-    			shade: [0],
-        		iframe: {src:"showExp.jsp?experimentId=${experiment.id}"},
-				success: function(){
-        		layer.shift('top'); 
-    		}
-			});
-			});
-		</c:if>
-  	</c:forEach>
-	$('.upExp').on('click',function(){
-         $.layer({
-    	type: 2,
-		btns:2,
-		btn: ['确定', '取消'],
-    	title: '上传实验报告',
-    	area: ['300px', '150px'],
-		offset: [($(window).height() - 200)/2 + 'px', ''],
-    	shade: [0],
-        iframe: {src:"upExp.html"},
-		success: function(){
-        layer.shift('top'); 
-    }
-	});
-});
-</script>
 
 </body>
 </html>

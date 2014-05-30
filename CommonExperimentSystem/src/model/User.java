@@ -127,7 +127,7 @@ public class User implements Serializable{
 	}
 	
 	public void submitReport(Experiment experiment, String link){
-		this.position.submitReport(experiment, link);
+		this.position.submitReport(experiment, link, this.id);
 	}
 	
 	public void createCourse(Course course) {

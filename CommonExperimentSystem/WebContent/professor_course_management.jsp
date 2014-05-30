@@ -35,7 +35,7 @@
       			<c:if test="${course.open}">
       				<a href="CourseOpenCloseServlet?courseId=${course.id }&open=false"><button type="button">关闭课程</button></a>
       			</c:if>
-      			<a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}"><button type="button" class="student_management">管理实验</button></a>
+      			<a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}&courseName=${course.name}"><button type="button" class="student_management">管理实验</button></a>
       			<a href="DeleteCourseServlet?id=${sessionScope.id.id }&courseId=${course.id }"><button type="button">删除</button></a></li>
       		</c:forEach>
       	</c:otherwise>

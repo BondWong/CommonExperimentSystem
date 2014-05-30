@@ -23,7 +23,8 @@ import javax.persistence.Version;
 @Access(AccessType.FIELD)
 @NamedQueries(value = { @NamedQuery(name = "Course.getById", query = "SELECT c FROM Course c WHERE c.id = ?1"), 
 		@NamedQuery(name = "Course.getAll", query = "SELECT c FROM Course c"), 
-		@NamedQuery(name = "Course.getOpen", query = "SELECT c FROM Course c WHERE c.isOpen = 1")})
+		@NamedQuery(name = "Course.getOpen", query = "SELECT c FROM Course c WHERE c.isOpen = 1 AND c NOT IN (SELECT uac FROM User u JOIN u.appliedCourses uac WHERE u.id = ?1)"),
+		@NamedQuery(name = "Course.getByUserID", query = "SELECT c FROM Course c WHERE c IN (SELECT uac FROM User u JOIN u.appliedCourses uac WHERE u.id = ?1)")})
 public class Course implements Serializable{
 	/**
 	 * 
