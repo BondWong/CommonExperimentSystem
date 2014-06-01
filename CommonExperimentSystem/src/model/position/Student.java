@@ -58,7 +58,6 @@ public class Student extends Position implements Serializable{
 	public void submitReport(Experiment experiment, String reportLink, String id) {
 		// TODO Auto-generated method stub
 		experiment.addReportLink(reportLink);
-		experiment.addReportor(id);
 	}
 
 	@Override
@@ -87,6 +86,30 @@ public class Student extends Position implements Serializable{
 	public void createExperiment(Course course, Experiment experiment) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Set<Long> getReportedExpIds() {
+		// TODO Auto-generated method stub
+		if(this.reportExpIDs == null){
+			this.reportExpIDs = new LinkedHashSet<Long>();
+		}
+		return this.reportExpIDs;
+	}
+
+	@Override
+	public void setReportedExpIds(Set<Long> reportedExpIds) {
+		// TODO Auto-generated method stub
+		this.reportExpIDs = reportedExpIds;
+	}
+
+	@Override
+	public void addReportedExpId(Long id) {
+		// TODO Auto-generated method stub
+		if(this.reportExpIDs == null){
+			this.reportExpIDs = new LinkedHashSet<Long>();
+		}
+		this.reportExpIDs.add(id);
 	}
 
 }

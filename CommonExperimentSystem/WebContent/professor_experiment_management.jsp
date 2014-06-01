@@ -72,8 +72,8 @@
 		          });
 			layer.close(index);
 			},
-    	area: ['600px', '550px'],
-		offset: [($(window).height() - 450)/2 + 'px', ''],
+    	area: ['600px', '600px'],
+		offset: [($(window).height() - 600)/2 + 'px', ''],
     	shade: [0],
         iframe: {src:"addExp.html"},
 		success: function(){
@@ -108,8 +108,8 @@
 		          });
 			layer.close(index);
 			},
-    	area: ['600px', '550px'],
-		offset: [($(window).height() - 450)/2 + 'px', ''],
+    	area: ['600px', '600px'],
+		offset: [($(window).height() - 600)/2 + 'px', ''],
     	shade: [0],
         iframe: {src:"editExp.jsp?experimentId=${experiment.id}"},
 		success: function(){
@@ -121,12 +121,12 @@
 		 $.layer({
 		    	type: 2,
 		    	title: '查看实验报告',
-		    	btns:2,
-		    	btn: ['确定', '取消'],
-		       	area: ['600px', '550px'],
-				offset: [($(window).height() - 450)/2 + 'px', ''],
+		    	btns:1,
+		    	btn: ['返回'],
+		       	area: ['600px', '350px'],
+				offset: [($(window).height() - 350)/2 + 'px', ''],
 		    	shade: [0],
-		        iframe: {src:"showReport.jsp"},
+		        iframe: {src:"GetReportLinksServlet?experimentId=${experiment.id}"},
 				success: function(){
 		        layer.shift('top'); 
 		    }

@@ -1,7 +1,12 @@
 package business;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -47,8 +51,23 @@ public class FileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String uri = request.getParameter("uri");
+		
+		File file = new File(root + "/experimentReports/"+uri);
+		InputStream fis  =   new  BufferedInputStream( new  FileInputStream(file));  
+        byte [] buffer  =   new   byte [fis.available()];  
+        fis.read(buffer);  
+       	fis.close();
+       	
+		response.addHeader( "Content-disposition" ,  "attachment;filename="+file.getName());
+		response.addHeader( "Content-length" ,  ""   +  file.length());
+		response.setContentType( " application/octet-stream " );
+		OutputStream toClient  =   new  BufferedOutputStream(response.getOutputStream());  
+		toClient.write(buffer);
+		toClient.flush();
+		toClient.close();
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -57,11 +76,9 @@ public class FileServlet extends HttpServlet {
 		System.out.println("FileServlet");
 		String id = request.getParameter("id");
 		Long experimentId = Long.parseLong(request.getParameter("experimentId"));
-		System.out.println(id + " " + experimentId);
 		String link = null;
 		try {
 			link = process(request, id, experimentId);
-			System.out.println(link);
 		} catch (FileSizeLimitExceededException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,13 +98,6 @@ public class FileServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		String url = "GetExperimentsServlet";
-		HttpSession session = request.getSession();
-		synchronized(session){
-			url+=("?id="+id+"&courseId"+session.getAttribute("experimentCourseId")+"courseName"+session.getAttribute("courseName"));
-			System.out.println(url);
-		}
-		response.sendRedirect(url);
 	}
 	
 	private void setUp(){
@@ -127,9 +137,9 @@ public class FileServlet extends HttpServlet {
 			
 			item.write(uploaddedFile);
 			
-			link = uploaddedFile.getAbsolutePath();
+			link = id + "-" + experimentId + "." + contentType.substring(contentType.indexOf("/")+1, contentType.length());
 		}
-		
+		System.out.println(link);
 		return link;
 	}
 	

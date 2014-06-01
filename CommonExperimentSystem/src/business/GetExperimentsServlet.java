@@ -58,6 +58,7 @@ public class GetExperimentsServlet extends HttpServlet {
 			Transaction transaction = new GetExperimentsTransaction();
 			try {
 				experiments = (List<Experiment>) transaction.execute(courseId);
+				System.out.println(experiments.size());
 				} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,7 +71,6 @@ public class GetExperimentsServlet extends HttpServlet {
 		}
 			
 		synchronized(session){
-			System.out.println(((User)session.getAttribute("id")).getUserType().name().toLowerCase() + "_experiment_management.jsp");
 			response.sendRedirect(((User)session.getAttribute("id")).getUserType().name().toLowerCase() + "_experiment_management.jsp");
 		}
 		

@@ -56,33 +56,12 @@
 				$('.upExp').on('click',function(){
         		$.layer({
     			type: 2,
-				btns:2,
-				btn: ['确定', '取消'],
+    			btns:1,
     			title: '上传实验报告',
-    			yes: function(index){
-    				var file = new FormData($(layer.getChildFrame("#reportUpload", index))[0]);
-					//var file = layer.getChildFrame("#reportUpload", index).val();
-					alert(file);
-					var data = {"id":"${sessionScope.id.id}","experimentId":"${experiment.id}","file":file};
-					alert(data);
-					$.ajax({ 
-		          		type : "post",
-		          		url : "FileServlet", 
-		          		data : data, 
-		          		async : false,
-		          		cache: false,
-		    	        contentType: false,
-		    	        processData: false,
-		          		success:function(data){
-							location.reload();
-		          		}
-		          	});
-					layer.close(index);
-				},
     			area: ['300px', '150px'],
 				offset: [($(window).height() - 150)/2 + 'px', ''],
     			shade: [0],
-        		iframe: {src:"upExp.html"},
+        		iframe: {src:"SentReportCheckServlet?id=${sessionScope.id.id}&experimentId=${experiment.id}"},
 				success: function(){
         			layer.shift('top'); 
     			}

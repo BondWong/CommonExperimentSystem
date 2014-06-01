@@ -86,4 +86,22 @@ public class Professor extends Position implements Serializable{
 		course.addExperiment(experiment);
 	}
 
+	@Override
+	public Set<Long> getReportedExpIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setReportedExpIds(Set<Long> reportedIds) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addReportedExpId(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

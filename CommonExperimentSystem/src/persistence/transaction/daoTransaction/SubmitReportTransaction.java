@@ -18,6 +18,7 @@ public class SubmitReportTransaction extends DAOTransaction{
 		Experiment e = edao.singleResultQueryRead(Experiment.class, "Experiment.getById", params[1]);
 		u.submitReport(e, (String) params[2]);
 		edao.update(e);
+		udao.update(u);
 		return null;
 	}
 

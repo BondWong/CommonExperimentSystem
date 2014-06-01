@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -128,8 +129,19 @@ public class User implements Serializable{
 	
 	public void submitReport(Experiment experiment, String link){
 		this.position.submitReport(experiment, link, this.id);
+		this.position.addReportedExpId(experiment.getId());
 	}
 	
+	@Access(AccessType.PROPERTY)
+	@ElementCollection
+	public Set<Long> getReportedExpIds() {
+		return this.position.getReportedExpIds();
+	}
+
+	public void setReportedExpIds(Set<Long> reportedExpIds) {
+		this.position.setReportedExpIds(reportedExpIds);
+	}
+
 	public void createCourse(Course course) {
 		this.position.createCourse(this, course);
 	}

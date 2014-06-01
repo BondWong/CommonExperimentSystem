@@ -21,7 +21,8 @@ import javax.persistence.Version;
 @NamedQueries(value = { @NamedQuery(name = "Experiment.getAll", query = "SELECT e FROM Experiment e"),
 		@NamedQuery(name = "Experiment.getById", query = "SELECT e FROM Experiment e WHERE e.id = ?1"),
 		@NamedQuery(name = "Experiment.getByCourseId", query = "SELECT e FROM Experiment e WHERE e.courseId = ?1"),
-		@NamedQuery(name = "Experiment.deleteById", query = "DELETE FROM Experiment e WHERE e.id = ?1")})
+		@NamedQuery(name = "Experiment.deleteById", query = "DELETE FROM Experiment e WHERE e.id = ?1"),
+		@NamedQuery(name = "Experiment.getReports", query = "SELECT r FROM Experiment e JOIN e.reportLinks r WHERE e.id = ?1")})
 public class Experiment implements Serializable{
 	/**
 	 * 
@@ -32,6 +33,8 @@ public class Experiment implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private Long id;
+	@Transient
+	private String stringId;
 	@Version
 	private Integer version;
 	private String name;
@@ -43,8 +46,6 @@ public class Experiment implements Serializable{
 	private String description;
 	@ElementCollection
 	private Set<String> reportLinks;
-	@ElementCollection
-	private Set<String> reportors;
 	
 	public Long getId() {
 		return id;
@@ -54,6 +55,14 @@ public class Experiment implements Serializable{
 		this.id = id;
 	}
 
+	public String getStringId() {
+		return this.id.toString();
+	}
+	
+	public void setStringId() {
+		
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -126,31 +135,6 @@ public class Experiment implements Serializable{
 
 	public void setReportLinks(Set<String> reportLinks) {
 		this.reportLinks = reportLinks;
-	}
-	
-	public Set<String> getReportors() {
-		if(this.reportors == null){
-			this.reportors = new LinkedHashSet<String>();
-		}
-		return this.reportors;
-	}
-	
-	public void setReportors(Set<String> reportors) {
-		this.reportors = reportors;
-	}
-	
-	public void addReportor(String id) {
-		if(this.reportors == null){
-			this.reportors = new LinkedHashSet<String>();
-		}
-		this.reportors.add(id);
-	}
-	
-	public void removeReportor(String id) {
-		if(this.reportors == null){
-			this.reportors = new LinkedHashSet<String>();
-		}
-		this.reportors.remove(id);
 	}
 	
 	public boolean equals(Object object){
