@@ -57,9 +57,9 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("id", user);
 			}
 			response.sendRedirect(user.getUserType().name().toLowerCase() + "_index.jsp");
-			//dispatcher to not find
 		} else{
-			
+			response.setContentType("application/json");
+			response.getWriter().write("error");
 		}
 	}
 
