@@ -27,13 +27,13 @@
   <div id="right_content">
     <h3>个人信息</h3>
     <div id="form">
-    <form action="UpdateUserInfoServlet" method="post">
+    <form action="UpdateUserInfoServlet" method="post" onsubmit="return userInfoValidate()">
       	<ul>
       		<li>&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;D&nbsp;&nbsp;&nbsp;&nbsp;：<input name="id" value="${sessionScope.id.id }" readOnly/></li>
-    		<li>&nbsp;&nbsp;&nbsp;姓&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;：<input name="name" size="18" value="${sessionScope.id.name }"/></li>
+    		<li>&nbsp;&nbsp;&nbsp;姓&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;：<input type="text" name="name" size="18" id="name" value="${sessionScope.id.name }"/></li>
         	<li>&nbsp;&nbsp;&nbsp;科&nbsp;&nbsp;室&nbsp;&nbsp;&nbsp;：<input name="classification" size="18" value="${sessionScope.id.classification }" readOnly/></li>
         	<li>&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;码&nbsp;&nbsp;&nbsp;：<input type="password" name="newPassword" id="Name" size="18" maxlength="30" /></li>
-        	<li>当前密码：<input type="password" name="oldPassword" id="Name" size="18" maxlength="30" /></li>
+        	<li>当前密码：<input type="password" name="oldPassword" id="oldPassword" size="18" maxlength="30" /></li>
       	</ul>
         <input type="submit" value="保存" />
      </form>

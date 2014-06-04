@@ -7,9 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>login</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/code.js"></script>
 </head>
 
-<body>
+<body onload="createCode();">
 <div class="container">
 	<div id="login_top"></div>
 	<div id="login_content">
@@ -32,7 +33,7 @@
                 <span id="login_title">暨南大学通用课程实验平台V1.0</span>
     		</div>
 		<div id="apLogin">
-        <form action="Login" method="post">
+        <form action="Login" method="post" onsubmit="return validate()">
         	<input type="hidden" name="hiddenCode" value="<c:out value='${sessionScope.hiddenCode }'/>"/>
         <p>
             <label for="Name">账  号:</label>
@@ -44,8 +45,9 @@
         </p>
         <p>
             <label for="validation">验证码</label>
-            <input type="text" name="validation" id="validation" size="8" maxlength="8" />
-            <img alt="testImg"  src="images/test.jpg" />
+            <input type="text" id="input1" size="8"/>
+            <input type="button" id="checkCode" class="code" style="width: 55px; border:none; color:#F00; font-size:24; font-style:italic; font-weight:bolder" onclick="" disabled/> 
+            <a href="#" onclick="createCode()">看不清楚</a>
         </p>
         <div class="button_group">
             <input type="submit" class="buttom" value="登录" />

@@ -8,7 +8,7 @@
 
 <body>
 <div class="container">
-		<form action="#" method="post">
+		<form action="#" method="post"  onsubmit="return courseValidate()">
 		<h1>课程信息</h1>
         <p>
             <span class="title"><label for="name">课程名称:</label></span>
@@ -30,7 +30,6 @@
    			 <span class="title"><label for="description">描述:</label></span>
             <textarea name="description" cols="45" rows="6" id="courseDescription"></textarea>
    		</p>
-   		
         </form>
 </div>
 </body>

@@ -61,6 +61,9 @@
 			var description = layer.getChildFrame("#experiment_description", index).val();
 			var courseName = "${sessionScope.courseName}";
 			var data = {"id":"${sessionScope.id.id}","courseId":"${sessionScope.experimentCourseId}","name":name,"type":type,"duration":duration,"purpose":purpose,"demand":demand,"description":description,"courseName":courseName};
+			if(experimentValidate(name,type,duration,purpose,demand,description) == 0){
+				return false;
+			}
 			$.ajax({ 
 		          type : "post", 
 		          url : "CreateExperimentServlet", 
@@ -97,6 +100,9 @@
 			var demand = layer.getChildFrame("#experiment_demand", index).val();
 			var description = layer.getChildFrame("#experiment_description", index).val();
 			var data = {"courseId":"${sessionScope.experimentCourseId}","experimentId":"${experiment.id}","name":name,"type":type,"duration":duration,"purpose":purpose,"demand":demand,"description":description};
+			if(experimentValidate(name,type,duration,purpose,demand,description) == 0){
+				return false;
+			}
 			$.ajax({ 
 		          type : "post", 
 		          url : "UpdateExperimentServlet", 

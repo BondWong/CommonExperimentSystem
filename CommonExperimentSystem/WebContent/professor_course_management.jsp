@@ -66,6 +66,9 @@
 			var duration = layer.getChildFrame("#courseDuration", index).val();
 			var description = layer.getChildFrame("#courseDescription", index).val();
 			var data = {"id":"${sessionScope.id.id}","name":name,"classTime":classTime,"major":major,"duration":duration,"description":description};
+			if(courseValidate(name,classTime,major,duration,description) == 0){
+				return false;
+			}
 			$.ajax({ 
 		          type : "post", 
 		          url : "CreateCourseServlet", 
@@ -102,6 +105,9 @@
 			var classTime = layer.getChildFrame("#course_classTime", index).val();
 			var duration = layer.getChildFrame("#course_duration", index).val();
 			var data = {"courseId":"${course.id}","name":name,"classTime":classTime,"duration":duration};
+			if(courseEditValidate(name,classTime,duration) == 0){
+				return false;
+			}
 			$.ajax({ 
 		          type : "post", 
 		          url : "UpdateCourseServlet", 

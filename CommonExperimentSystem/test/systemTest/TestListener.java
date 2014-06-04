@@ -44,21 +44,21 @@ public class TestListener implements ServletContextListener {
     	p.setClassification("电气信息学院");
     	p.setId("2011052406");
     	p.setName("周密");
-    	p.setPassword("1901103390");
+    	p.setPassword("123456");
     	
     	User s = new User();
     	s.setUserType(UserType.STUDENT);
     	s.setClassification("11软工");
     	s.setId("2011052407");
     	s.setName("黃俊邦");
-    	s.setPassword("1901103390");
+    	s.setPassword("123456");
     	
     	User a = new User();
     	a.setUserType(UserType.ADMIN);
     	a.setClassification("电信信息学院教务处");
     	a.setId("2011052405");
     	a.setName("煞笔");
-    	a.setPassword("1901103390");
+    	a.setPassword("123456");
     	
     	EntityManagerFactory emf = EntityManagerFactoryCreator.getInstance().getEntityManagerFactory();
     	EntityManager em = emf.createEntityManager();

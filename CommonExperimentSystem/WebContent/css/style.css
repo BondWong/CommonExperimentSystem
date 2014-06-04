@@ -406,7 +406,9 @@
 }
 #applyE {
 	margin-top: 10px;
-
-
-
 }
+}
+#apLogin form a {
+	font-size: 10px;
+}
+
