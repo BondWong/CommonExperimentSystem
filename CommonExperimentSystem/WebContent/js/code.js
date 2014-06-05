@@ -16,9 +16,6 @@ if(code.length != codeLength){
 }
 checkCode.value = code;
 }
-function isNull(str){
-	if(str == "") {}
-}
 function validate() { 
 	//validate username
 	var username = document.getElementById("id").value;

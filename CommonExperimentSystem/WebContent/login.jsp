@@ -34,12 +34,7 @@
     		</div>
 		<div id="apLogin">
         <form action="Login" method="post" onsubmit="return validate()">
-        	<input type="hidden" name="hiddenCode" value="<c:out value='${sessionScope.hiddenCode }'/>"/>
-        <c:if test="${param.fail }">
-        	<p>
-        	<label>账号或密码错误</label>
-        	</p>	
-        </c:if>
+        	
         <p>
             <label for="Name">账  号:</label>
             <input type="text" name="id" id="id" size="18" maxlength="30" />
@@ -57,6 +52,12 @@
         <div class="button_group">
             <input type="submit" class="buttom" value="登录" />
             <input type="submit" class="buttom" value="忘记密码" />
+            <input type="hidden" name="hiddenCode" value="<c:out value='${sessionScope.hiddenCode }'/>"/>
+        <c:if test="${param.fail }">
+        	<p>
+        	<script type="text/javascript">alert("账号或密码错误!");</script>
+        	</p>	
+        </c:if>
         </div>     
         </form>
   		</div>
