@@ -58,8 +58,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			response.sendRedirect(user.getUserType().name().toLowerCase() + "_index.jsp");
 		} else{
-			response.setContentType("application/json");
-			response.getWriter().write("error");
+			response.sendRedirect("login.jsp?fail=true");
 		}
 	}
 
