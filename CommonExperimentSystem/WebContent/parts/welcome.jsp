@@ -7,7 +7,7 @@
   <div id="right_content">
     <div id="form">
       <ul>
-    <li><a>powered by Wilson and Bond</a></li>
+    <li><a>powered by Bond and Winson</a></li>
     </ul>
   </div>
     

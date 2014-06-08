@@ -9,6 +9,6 @@
     <li><a href="#">网站地图</a></li>
   </ul>
   <p>&nbsp;</p>
-  <p>COPYRIGHT © 2014 11软工 ALL RIGHTS RESERVED. ICP备05001202号</p>
+  <p>COPYRIGHT © 2014 11软工 Bond and Winson ALL RIGHTS RESERVED.</p>
 </div>
 </div>

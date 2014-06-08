@@ -83,10 +83,6 @@
  		area: ['600px', '400px'],
 		offset: [($(window).height() - 450)/2 + 'px', ''],
  		shade: [0],
-		end: function(){
-			if(status == 1){alert("OK");}
-			if(status == 0){alert("fail");}
-			},
      iframe: {src:"addCourse.html"},
 		success: function(){
      layer.shift('top'); 

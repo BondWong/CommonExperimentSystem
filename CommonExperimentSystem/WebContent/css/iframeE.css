@@ -79,3 +79,10 @@ form p {
 	border-bottom-style: dotted;
 	border-bottom-color: #E5E5E5;
 }
+input {
+	width:339px;
+}
+textarea {
+	width:339px;
+	height:96px;
+}
