@@ -1,12 +1,15 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -48,7 +51,10 @@ public class Course implements Serializable{
 	private User owner;
 	@OneToMany(cascade={CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval=true, fetch=FetchType.EAGER)
 	private Set<Experiment> experiments;
-	
+	@ElementCollection
+	private List<String> applicantNames;
+	@ElementCollection
+	private Set<String> applicantIDs;
 	public Long getId() {
 		return id;
 	}
@@ -147,6 +153,38 @@ public class Course implements Serializable{
 	
 	public void setExperiments(Set<Experiment> experiments) {
 		this.experiments = experiments;
+	}
+	
+	public List<String> getApplicantNames() {
+		if(this.applicantNames == null)
+			this.applicantNames = new ArrayList<String>();
+		return applicantNames;
+	}
+
+	public void setApplicantNames(List<String> applicantNames) {
+		this.applicantNames = applicantNames;
+	}
+	
+	public void addApplicantName(String name) {
+		if(this.applicantNames == null)
+			this.applicantNames = new ArrayList<String>();
+		this.applicantNames.add(name);
+	}
+
+	public Set<String> getApplicantIDs() {
+		if(this.applicantIDs==null)
+			this.applicantIDs = new LinkedHashSet<String>();
+		return applicantIDs;
+	}
+
+	public void setApplicantIDs(Set<String> applicantIDs) {
+		this.applicantIDs = applicantIDs;
+	}
+	
+	public void addApplicationID(String applicantID) {
+		if(this.applicantIDs==null)
+			this.applicantIDs = new LinkedHashSet<String>();
+		this.applicantIDs.add(applicantID);
 	}
 	
 	public boolean equals(Object object){

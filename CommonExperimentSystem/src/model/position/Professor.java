@@ -23,7 +23,7 @@ public class Professor extends Position implements Serializable{
 	}
 
 	@Override
-	public void applyCourse(Course course) {
+	public void applyCourse(Course course, String id, String name) {
 		// TODO Auto-generated method stub
 		
 	}

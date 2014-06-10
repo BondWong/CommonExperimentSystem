@@ -14,7 +14,7 @@ public abstract class Position {
 	
 	public abstract UserType getUserType();
 	
-	public abstract void applyCourse(Course course);
+	public abstract void applyCourse(Course course, String id, String name);
 	public abstract void removeAppliedCourse(Course course);
 	public abstract Set<Course> getAppliedCourses();
 	public abstract void setAppliedCourses(Set<Course> appliedCourses);

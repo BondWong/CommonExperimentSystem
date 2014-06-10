@@ -22,7 +22,8 @@ import javax.persistence.Version;
 		@NamedQuery(name = "Experiment.getById", query = "SELECT e FROM Experiment e WHERE e.id = ?1"),
 		@NamedQuery(name = "Experiment.getByCourseId", query = "SELECT e FROM Experiment e WHERE e.courseId = ?1"),
 		@NamedQuery(name = "Experiment.deleteById", query = "DELETE FROM Experiment e WHERE e.id = ?1"),
-		@NamedQuery(name = "Experiment.getReports", query = "SELECT r FROM Experiment e JOIN e.reportLinks r WHERE e.id = ?1")})
+		@NamedQuery(name = "Experiment.getReports", query = "SELECT r FROM Experiment e JOIN e.reportLinks r WHERE e.id = ?1"),
+		@NamedQuery(name = "Experiment.getAllReportLinks", query = "SELECT rl FROM Experiment e JOIN e.reportLinks rl")})
 public class Experiment implements Serializable{
 	/**
 	 * 

@@ -15,6 +15,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import model.User;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
@@ -73,12 +76,16 @@ public class FileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("FileServlet");
+		HttpSession session = request.getSession();
+		String name = "";
+		synchronized(session) {
+			name = ((User)session.getAttribute("id")).getName();
+		}
 		String id = request.getParameter("id");
 		Long experimentId = Long.parseLong(request.getParameter("experimentId"));
 		String link = null;
 		try {
-			link = process(request, id, experimentId);
+			link = process(request, id, name, experimentId);
 		} catch (FileSizeLimitExceededException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,7 +119,7 @@ public class FileServlet extends HttpServlet {
         		.getRealPath("/");
 	}
 	
-	private String process(HttpServletRequest request, String id, Long experimentId) throws FileUploadException,
+	private String process(HttpServletRequest request, String id, String name, Long experimentId) throws FileUploadException,
 		FileUploadBase.FileSizeLimitExceededException, 
 		Exception{
 		List<FileItem> items = upload.parseRequest(request);
@@ -133,11 +140,11 @@ public class FileServlet extends HttpServlet {
 			
 			String contentType = item.getContentType();
 			File uploaddedFile = new File(root + "/experimentReports/" + 
-					id + "-" + experimentId + "." + contentType.substring(contentType.indexOf("/")+1, contentType.length()));
+					id + "-" + experimentId + "." + contentType.substring(contentType.lastIndexOf("/")+1, contentType.length()));
 			
 			item.write(uploaddedFile);
 			
-			link = id + "-" + experimentId + "." + contentType.substring(contentType.indexOf("/")+1, contentType.length());
+			link = id + "-" + name + "-" + experimentId + "." + contentType.substring(contentType.lastIndexOf("/")+1, contentType.length());
 		}
 		System.out.println(link);
 		return link;

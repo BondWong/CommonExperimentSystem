@@ -34,7 +34,7 @@
       			<li><span>实验<c:out value="${count.count }"></c:out>：<c:out value = "${experiment.name }"/></span>
       			<button type="button" id="experiment${experiment.id }report">查看实验报告</button>
       			<button type="button" id="experiment${experiment.id }">编辑</button>
-      			<a href="DeleteExperimentServlet?experimentId=${experiment.id}&courseId=${experiment.courseId}"><button type="button">删除</button></a></li>
+      			<a href="DeleteReportsServlet?experimentId=${experiment.id}&courseId=${experiment.courseId}"><button type="button">删除</button></a></li>
       		</c:if>
       	</c:forEach>
     	</c:otherwise>

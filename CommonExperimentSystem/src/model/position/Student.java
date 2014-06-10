@@ -23,12 +23,14 @@ public class Student extends Position implements Serializable{
 	}
 
 	@Override
-	public void applyCourse(Course course) {
+	public void applyCourse(Course course, String id, String name) {
 		// TODO Auto-generated method stub
 		if(appliedCourses == null){
 			appliedCourses = new LinkedHashSet<Course>();
 		}
 		course.addApplicationNum();
+		course.addApplicationID(id);
+		course.addApplicantName(name);
 		appliedCourses.add(course);
 	}
 

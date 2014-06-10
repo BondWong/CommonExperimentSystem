@@ -15,7 +15,7 @@ public class IsReportSentTransaction extends DAOTransaction{
 		DAO<User> udao = new DAO<User>(User.class, em);
 		user = udao.singleResultRead(User.class, params[0]);
 		System.out.println(user.getReportedExpIds() + " " + params[1]);
-		return user.getReportedExpIds().contains(params[1]);
+		return user.getReportedExpIds().contains((Long) params[1]);
 	}
 
 }

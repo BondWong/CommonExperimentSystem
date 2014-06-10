@@ -107,7 +107,7 @@ public class User implements Serializable{
 	}
 	
 	public void applyCourse(Course course){
-		this.position.applyCourse(course);
+		this.position.applyCourse(course, this.id, this.name);
 	}
 	
 	public void removeAppliedCourse(Course course){
@@ -133,7 +133,7 @@ public class User implements Serializable{
 	}
 	
 	@Access(AccessType.PROPERTY)
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	public Set<Long> getReportedExpIds() {
 		return this.position.getReportedExpIds();
 	}

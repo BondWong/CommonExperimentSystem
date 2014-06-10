@@ -28,7 +28,14 @@
       	</c:when>
       	<c:otherwise>
       		<c:forEach var="course" items="${sessionScope.selectedCourses }" >
-      			<li><span>${ course.name}</span><a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}&courseName=${course.name}"><button type="button" class="student_management">查看实验</button></a></li>
+      			<li><span>${ course.name}</span>
+      			<c:if test="${course.open }">
+      				<a href="GetExperimentsServlet?id=${sessionScope.id.id }&courseId=${course.id}&courseName=${course.name}"><button type="button" class="student_management">查看实验</button></a>
+      			</c:if>
+      			<c:if test="${!course.open }">
+      				<button type="button">实验已经关闭</button>
+      			</c:if>
+      			</li>
       		</c:forEach>
       	</c:otherwise>
       </c:choose>
