@@ -138,13 +138,12 @@ public class FileServlet extends HttpServlet {
 				dir.mkdir();
 			}
 			
-			String contentType = item.getContentType();
 			File uploaddedFile = new File(root + "/experimentReports/" + 
-					id + "-" + experimentId + "." + contentType.substring(contentType.lastIndexOf("/")+1, contentType.length()));
+					id + "-" + experimentId + "." + "doc");
 			
 			item.write(uploaddedFile);
 			
-			link = id + "-" + name + "-" + experimentId + "." + contentType.substring(contentType.lastIndexOf("/")+1, contentType.length());
+			link = id + "-" + name + "-" + experimentId + "." + "doc";
 		}
 		System.out.println(link);
 		return link;
