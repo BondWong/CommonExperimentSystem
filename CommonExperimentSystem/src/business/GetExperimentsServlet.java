@@ -46,7 +46,10 @@ public class GetExperimentsServlet extends HttpServlet {
 			synchronized(session){
 				session.setAttribute("courseName", courseName);
 			}
+		} else{
+			courseName = (String) session.getAttribute("courseName");
 		}
+		
 		boolean hasExperiment = false;
 		
 		synchronized(session){

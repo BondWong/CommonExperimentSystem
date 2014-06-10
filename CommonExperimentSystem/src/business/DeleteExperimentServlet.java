@@ -35,6 +35,7 @@ public class DeleteExperimentServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		Long experimentId = Long.parseLong(request.getParameter("experimentId"));
 		Long courseId = Long.parseLong(request.getParameter("courseId"));
+		
 		Transaction transaction = new DeleteExperimentTransaction();
 		try {
 			transaction.execute(experimentId, courseId);
@@ -46,6 +47,7 @@ public class DeleteExperimentServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		synchronized(session){
 			session.removeAttribute("experiments");
+			session.removeAttribute("experimentCourseId");
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("GetExperimentsServlet");
