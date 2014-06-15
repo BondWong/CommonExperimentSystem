@@ -2,10 +2,10 @@ package model.position;
 
 import java.util.Set;
 
+import utils.UserType;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 public abstract class Position {
 	protected Set<Course> appliedCourses;

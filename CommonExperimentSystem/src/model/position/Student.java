@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import utils.UserType;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 public class Student extends Position implements Serializable{
 

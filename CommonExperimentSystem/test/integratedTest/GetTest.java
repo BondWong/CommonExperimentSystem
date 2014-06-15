@@ -11,7 +11,6 @@ import javax.persistence.EntityManagerFactory;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +22,7 @@ import persistence.transaction.daoTransaction.GetCreatedCoursesTransaction;
 import persistence.transaction.daoTransaction.GetExperimentsTransaction;
 import persistence.transaction.daoTransaction.GetOpenedCoursesTransaction;
 import persistence.transaction.daoTransaction.GetSelectedCoursesTransaction;
+import utils.UserType;
 
 public class GetTest {
 	private EntityManagerFactory emf;

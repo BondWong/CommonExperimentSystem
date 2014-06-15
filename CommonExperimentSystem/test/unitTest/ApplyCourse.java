@@ -3,9 +3,10 @@ package unitTest;
 import static org.junit.Assert.*;
 import model.Course;
 import model.User;
-import model.UserType;
 
 import org.junit.Test;
+
+import utils.UserType;
 
 public class ApplyCourse {
 	@Test

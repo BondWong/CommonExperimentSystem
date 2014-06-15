@@ -8,10 +8,10 @@ import javax.servlet.annotation.WebListener;
 
 import persistence.DAO;
 import persistence.factory.EntityManagerFactoryCreator;
+import utils.UserType;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 /**
  * Application Lifecycle Listener implementation class TestListener

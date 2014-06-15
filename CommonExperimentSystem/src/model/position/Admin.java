@@ -3,10 +3,10 @@ package model.position;
 import java.io.Serializable;
 import java.util.Set;
 
+import utils.UserType;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 public class Admin extends Position implements Serializable{
 

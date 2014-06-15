@@ -10,7 +10,6 @@ import javax.persistence.EntityManagerFactory;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +19,7 @@ import persistence.factory.EntityManagerFactoryCreator;
 import persistence.transaction.Transaction;
 import persistence.transaction.daoTransaction.UpdateCourseTransaction;
 import persistence.transaction.daoTransaction.UpdateExperimentTransaction;
+import utils.UserType;
 
 public class UpdateTest {
 	@Before

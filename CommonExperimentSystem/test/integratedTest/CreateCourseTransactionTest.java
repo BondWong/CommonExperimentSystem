@@ -7,7 +7,6 @@ import javax.persistence.EntityManagerFactory;
 
 import model.Course;
 import model.User;
-import model.UserType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +15,7 @@ import persistence.DAO;
 import persistence.factory.EntityManagerFactoryCreator;
 import persistence.transaction.Transaction;
 import persistence.transaction.daoTransaction.CreateCourseTransaction;
+import utils.UserType;
 
 public class CreateCourseTransactionTest {
 	@Before

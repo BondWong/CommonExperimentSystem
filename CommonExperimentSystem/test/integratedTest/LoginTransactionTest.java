@@ -2,7 +2,6 @@ package integratedTest;
 
 import static org.junit.Assert.*;
 import model.User;
-import model.UserType;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,6 +10,7 @@ import persistence.transaction.Transaction;
 import persistence.transaction.daoTransaction.DeleteUserTransaction;
 import persistence.transaction.daoTransaction.LoginTransaction;
 import persistence.transaction.daoTransaction.RegisterTransaction;
+import utils.UserType;
 
 public class LoginTransactionTest {
 	@Test

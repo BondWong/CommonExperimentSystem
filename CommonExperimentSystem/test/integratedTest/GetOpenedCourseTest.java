@@ -9,13 +9,13 @@ import javax.persistence.EntityManagerFactory;
 
 import model.Course;
 import model.User;
-import model.UserType;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import persistence.DAO;
 import persistence.factory.EntityManagerFactoryCreator;
+import utils.UserType;
 
 public class GetOpenedCourseTest {
 	EntityManagerFactory emf;

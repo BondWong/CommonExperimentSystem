@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
+import utils.UserType;
 import model.position.Admin;
 import model.position.Position;
 import model.position.Professor;

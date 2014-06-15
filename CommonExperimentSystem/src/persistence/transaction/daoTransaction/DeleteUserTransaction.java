@@ -5,9 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import persistence.DAO;
+import utils.UserType;
 import model.Course;
 import model.User;
-import model.UserType;
 
 public class DeleteUserTransaction extends DAOTransaction{
 

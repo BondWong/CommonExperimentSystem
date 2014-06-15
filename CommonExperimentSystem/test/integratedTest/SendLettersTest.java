@@ -7,13 +7,13 @@ import javax.persistence.EntityManagerFactory;
 
 import model.Letter;
 import model.User;
-import model.UserType;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import persistence.DAO;
 import persistence.factory.EntityManagerFactoryCreator;
+import utils.UserType;
 
 public class SendLettersTest {
 	private EntityManagerFactory emf;

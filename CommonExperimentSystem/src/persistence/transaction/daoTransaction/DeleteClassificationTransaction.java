@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 
 import model.Course;
 import model.User;
-import model.UserType;
 import persistence.DAO;
+import utils.UserType;
 
 public class DeleteClassificationTransaction extends DAOTransaction{
 

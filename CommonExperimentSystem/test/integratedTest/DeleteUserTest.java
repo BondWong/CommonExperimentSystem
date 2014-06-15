@@ -9,7 +9,6 @@ import javax.persistence.EntityManagerFactory;
 
 import model.Course;
 import model.User;
-import model.UserType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +20,7 @@ import persistence.transaction.daoTransaction.DeleteClassificationTransaction;
 import persistence.transaction.daoTransaction.DeleteUserTransaction;
 import persistence.transaction.daoTransaction.GetClassificationsTransaction;
 import persistence.transaction.daoTransaction.GetUsersTransaction;
+import utils.UserType;
 
 public class DeleteUserTest {
 	@Before

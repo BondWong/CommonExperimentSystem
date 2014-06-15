@@ -8,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,6 +15,7 @@ import org.junit.Test;
 
 import persistence.DAO;
 import persistence.factory.EntityManagerFactoryCreator;
+import utils.UserType;
 
 public class ApplyCourse {
 	private EntityManagerFactory emf;

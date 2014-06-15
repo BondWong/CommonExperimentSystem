@@ -4,9 +4,10 @@ import static org.junit.Assert.*;
 import model.Course;
 import model.Experiment;
 import model.User;
-import model.UserType;
 
 import org.junit.Test;
+
+import utils.UserType;
 
 public class AllTogetherTest {
 	@Test
